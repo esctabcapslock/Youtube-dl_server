@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>유튜브</title>
+    <script>
+    function url2yurl(y_url){
+        if(!y_url) return 0;
+        if (! y_url.includes('youtube.com')) return 0;
+        
+        let x=y_url.indexOf('.com/watch?v=');
+        let y=y_url.indexOf('&');
+        let fin = y>0 ? y_url.substring(x+13,y) : y_url.substring(x+13);
+        console.log('fin',fin);
+        if (!fin.length || fin.includes('&')) return 0;
+        else return fin;
+    }
+    </script>
+</head>
+<body>
+  <header>
+      <h3>유튜브 음악 다운로더 (youtube-dl)</h3>
+  </header>
+   <main>
+    <form id='form1' action="./music/" method="post" accept-charset="utf-8" target="_blank">
+       
+        <input id='code' name="code" type="hidden">
+        <input id='hd' type="submit" style="display: none">
+    </form>
+        <input id='yurl' style="width: 500px;">
+        <button id=post>다운로드</button>
+    <script>
+    document.getElementById('post').addEventListener('click',(e)=>{
+        
+        var url=url2yurl(document.getElementById('yurl').value);
+        document.getElementById('code').value=url;
+        console.log('url',url);
+         document.getElementById('form1').style.backgroundColor= url ? 'white' : 'red';
+        if (url) document.getElementById('hd').click();
+    })
+
+    </script>
+    <div id="link">
+       <ul>유튜브 영상 링크를 넣고 '다운로드'버튼 클릭</ul>
+       <ul>영상 길이에 따라 10초 ~ 40초 걸림</ul>
+    </div>
+    </main>
+</body>
+</html>
